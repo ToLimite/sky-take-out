@@ -1,12 +1,14 @@
 package com.sky.controller.admin;
 
 import com.github.pagehelper.PageHelper;
+import com.google.errorprone.annotations.Var;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.CategoryService;
 import io.swagger.annotations.Api;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,19 @@ public class CategoryController {
         log.info("分类分页查询：{}", categoryPageQueryDTO);
         PageResult pageResult = categoryService.page(categoryPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 启用、禁用分类
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable Integer status, Long id){
+        log.info("启用、禁用分类{},{}", status, id);
+        categoryService.startOrStop(status, id);
+        return Result.success();
     }
 
 }

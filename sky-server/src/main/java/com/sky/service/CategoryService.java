@@ -17,4 +17,6 @@ public interface CategoryService {
      * @return
      */
     PageResult page(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    void startOrStop(Integer status, Long id);
 }
