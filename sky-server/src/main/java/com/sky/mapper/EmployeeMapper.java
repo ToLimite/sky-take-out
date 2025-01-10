@@ -46,6 +46,4 @@ public interface EmployeeMapper {
     @Select("select * from employee where id = #{id}")
     Employee getById(Long id);
 
-    @Delete("delete from category where id = #{id}")
-    void deleteById(Long id);
 }
