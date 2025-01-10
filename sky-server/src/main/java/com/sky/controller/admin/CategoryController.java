@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.google.errorprone.annotations.Var;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.entity.Category;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.CategoryService;
@@ -12,6 +13,8 @@ import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(tags = "分类相关接口")
 @RestController
@@ -83,6 +86,15 @@ public class CategoryController {
         return Result.success();
     }
 
-//    public Result
+    /**
+     * 根据类型查询分类
+     * @return
+     */
+    @GetMapping("/list")
+    public Result<List<Category>> getByType(Integer type){
+        log.info("根据类型查询分类:{}", type);
+        List<Category> category = categoryService.getByType(type);
+        return Result.success(category);
+    }
 
 }
