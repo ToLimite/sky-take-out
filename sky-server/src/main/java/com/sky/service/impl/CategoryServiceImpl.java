@@ -8,6 +8,7 @@ import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.mapper.CategoryMapper;
+import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
 import jdk.vm.ci.meta.Constant;
@@ -22,6 +23,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     /**
      * 新增分类
@@ -64,5 +67,14 @@ public class CategoryServiceImpl implements CategoryService {
         category.setUpdateTime(LocalDateTime.now());
         category.setUpdateUser(BaseContext.getCurrentId());
         categoryMapper.update(category);
+    }
+
+    /**
+     * 根据id删除分类
+     * @param id
+     */
+    @Override
+    public void deleteById(Long id) {
+        employeeMapper.deleteById(id);
     }
 }
