@@ -59,6 +59,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private WebSocketServer webSocketServer;
 
+
     /**
      * 用户下单
      * @param ordersSubmitDTO
@@ -219,6 +220,9 @@ public class OrderServiceImpl implements OrderService {
 
         OrderVO orderVO = new OrderVO();
         BeanUtils.copyProperties(orders, orderVO);
+        AddressBook addressBook = addressBookMapper.getById(orders.getAddressBookId());
+        String address = addressBook.getProvinceName() + addressBook.getCityName() + addressBook.getDetail();
+        orderVO.setAddress(address);
         orderVO.setOrderDetailList(orderDetailList);
         return orderVO;
     }
